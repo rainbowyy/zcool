@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/reset-min.css"/>
+    <link rel="stylesheet" href="css/jquery.fullPage.css"/>
+    <style type="text/css">
+        body{
+            font-family:"微软雅黑";
+        }
+        .clearfix:before,.clearfix:after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .section{
+            overflow: hidden;
+        }
+        .s1{background: url("images/s1.jpg")no-repeat center;
+            overflow: hidden;
+
+        }
+        .s2{background: url("images/s2.jpg")no-repeat center}
+        .s3{background: url("images/s3.jpg")no-repeat center}
+        .s4{background: url("images/s4.jpg")no-repeat center}
+        .s5{background: url("images/s5.jpg")no-repeat center}
+        header{
+            background: rgba(0,0,0,0.8);
+            width: 100%;
+            position: fixed;
+            z-index: 2;
+        }
+        .w{
+            width: 70%;
+            margin: 0 auto;
+        }
+        .logo{
+            float: left;
+            padding: 15px 0;
+        }
+        .logo img{
+            width: 177px;
+            height: 27px;
+        }
+        nav{
+            float: left;
+            margin-left: 20px;
+        }
+        .navbar li{
+            float: left;
+        }
+
+        .navbar li a:hover,.navbar li.active a{
+            background: #FC0;
+            color: #333333;
+        }
+        .navbar li a{
+            color: #fff;
+            text-decoration: none;
+            line-height: 60px;
+            display: inline-block;
+            padding:0 15px;
+            font-size: 16px;
+        }
+        .s1 img{
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left:-600px;
+            margin-top:-230px;
+            opacity: 0;
+            transition: 0.5s;
+            transition-delay: 0.8s;
+        }
+        .s1.active img{opacity: 1}
+        .section .left{
+            margin-left: 40px;
+            float: left;
+        }
+        .section ul{
+            position: absolute;
+            top: 50%;
+            margin-top: -180px;
+        }
+        .section ul li{
+            float: left;
+            margin-left: 20px;
+            transition: 0.5s;
+        }
+        .section ul li p{
+            margin: 20px 0;
+        }
+        .section ul li a{
+            text-decoration: none;
+            color: #333333;
+            padding: 10px 15px;
+            display: block;
+            width: 80px;
+           text-align: center;
+            background: #FFCC00;
+        }
+        .section .right{
+            float: right;
+            /*background: red;*/
+        }
+        .section .right .img {
+            float: left;
+
+        }
+        .section .right .text{
+            position: absolute;
+            text-align: right;
+            right: 100px;
+            margin-top: 120px;
+            line-height: 22px;
+        }
+        .section .right .text h2{
+            font-size: 30px;
+            font-weight: 300;
+            line-height: 50px;
+        }
+        .section .right .text a{
+            font-size: 14px;
+            color: #333333;
+        }
+        .s1 .right img{
+            margin-top: 100px;
+        }
+        .s4 .right img{
+            margin-top: 300px;
+        }
+        .s5 .right img{
+            width: 500px;
+            margin-top: 300px;
+        }
+        .s2 .left li{
+            transform:translateY(1000px);
+            -webkit-transform:translateY(1000px);
+        }
+        .s2.active .left li{
+            transform:translateY(0);
+            -webkit-transform:translateY(0);
+        }
+        .s2.active .left li:nth-child(1){
+            transition-delay: 0.8s;
+        }
+        .s2.active .left li:nth-child(2){
+            transition-delay: 1s;
+        }
+        .s2.active .left li:nth-child(3){
+            transition-delay: 1.2s;
+        }
+        .s3 .left li:nth-child(1){
+            transform:translateX(0);
+            -webkit-transform:translateX(0);
+        }
+        .s3 .left li:nth-child(2){
+            transform:translateX(-279px);
+            -webkit-transform:translateX(-279px);
+        }
+        .s3 .left li:nth-child(3){
+            transform:translateX(-558px);
+            -webkit-transform:translateX(-558px);
+        }
+        .s3.active .left li{
+            transform:translateX(0);
+            -webkit-transform:translateX(0);
+            transition-delay: 0.8s;
+        }
+        .s4 .left li:nth-child(1){
+            transform: translate(330px,-1000px);
+            -webkit-transform: translate(330px,-1000px);
+        }
+        .s4 .left li:nth-child(2){
+            transform: translate(0px,-1000px);
+            -webkit-transform: translate(0px,-1000px);
+        }
+        .s4 .left li:nth-child(3){
+            transform: translate(-330px,-1000px);
+            -webkit-transform: translate(-330px,-1000px);
+        }
+        @-webkit-keyframes move1 {
+            0%{transform: translate(330px,-1000px);}
+            25%{transform: translate(330px,0px);}
+            50%{transform: translate(330px,-10px);}
+            75%{transform: translate(330px,0px);}
+            100%{transform: translate(0px,0px);}
+        }
+        @keyframes move1 {
+            0%{transform: translate(330px,-1000px);}
+            25%{transform: translate(330px,0px);}
+            50%{transform: translate(330px,-10px);}
+            75%{transform: translate(330px,0px);}
+            100%{transform: translate(0px,0px);}
+        }
+        @-webkit-keyframes move2 {
+            0%{transform: translate(0px,-1000px);}
+            25%{transform: translate(0px,0px);}
+            50%{transform: translate(0px,-10px);}
+            75%{transform: translate(0px,0px);}
+            100%{transform: translate(0px,0px);}
+        }
+        @keyframes move2 {
+            0%{transform: translate(0px,-1000px);}
+            25%{transform: translate(0px,0px);}
+            50%{transform: translate(0px,-10px);}
+            75%{transform: translate(0px,0px);}
+            100%{transform: translate(0px,0px);}
+        }
+        @-webkit-keyframes move3 {
+            0%{transform: translate(-330px,-1000px);}
+            25%{transform: translate(-330px,0px);}
+            50%{transform: translate(-330px,-10px);}
+            75%{transform: translate(-330px,0px);}
+            100%{transform: translate(0px,0px);}
+        }
+        @keyframes move3 {
+            0%{transform: translate(-330px,-1000px);}
+            25%{transform: translate(-330px,0px);}
+            50%{transform: translate(-330px,-10px);}
+            75%{transform: translate(-330px,0px);}
+            100%{transform: translate(0px,0px);}
+        }
+        .s4.active .left li:nth-child(1){
+            -webkit-animation: move1 2s 0.8s forwards;
+           animation: move1 2s 0.8s forwards;
+        }
+        .s4.active .left li:nth-child(2){
+            -webkit-animation: move2 2s 0.8s forwards;
+            animation: move2 2s 0.8s forwards;
+        }
+        .s4.active .left li:nth-child(3){
+            -webkit-animation: move3 2s 0.8s forwards;
+            animation: move3 2s 0.8s forwards;
+        }
+        .s5 .lf{ margin-top:330px;
+            perspective:500px;}
+        .s5 .left li{ -webkit-transform:translate3d(-1000px,-1000px,-500px) rotateX(145deg);transform:translate3d(-1000px,-1000px,-500px) rotateX(145deg); }
+        .s5 .left li:nth-child(1){transition-delay:0.8s;}
+        .s5 .left li:nth-child(2){transition-delay:1s;}
+        .s5 .left li:nth-child(3){transition-delay:1.2s;}
+
+        .s5.active .left li{ -webkit-transform:translate3d(0,0,0px) rotateX(0deg);transform:translate3d(0,0,0px) rotateX(0deg);}
+        .s5 .right{
+            margin-top: -330px;
+        }
+
+
+
+
+
+
+
+    </style>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+    <script>
+        $(function(){
+            $("#main").fullpage({
+                'navigation': true,
+                anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
+                menu:".navbar",
+                'verticalCentered':false,
+
+            });
+
+        })
+    </script>
+</head>
+<body>
+<header>
+    <div class="w clearfix">
+        <div class="logo"> <a href="#"><img src="images/logo.png"></a></div>
+
+        <nav>
+            <ul class="navbar clearfix">
+                <li class="active" data-menuanchor="page1"><a href="#page1">首页</a></li>
+                <li data-menuanchor="page2"><a href="#page2">吉祥物语</a></li>
+                <li data-menuanchor="page3"><a href="#page3">Chow-Lee</a></li>
+                <li data-menuanchor="page4"><a href="#page4">北邦</a></li>
+                <li data-menuanchor="page5"><a href="#page5">绽放</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div id="main">
+    <div class="section s1">
+        <div><img src="images/wenzi.png" alt="1"/></div>
+    </div>
+    <div class="section s2">
+        <div class="left">
+            <ul>
+                <li><img src="images/img1.png" alt="1"/>
+                  <p>望<br/>30*40cm / 40*50cm</p>
+                    <a href="#">立即购买</a>
+                </li>
+                <li><img src="images/img2.png" alt="1"/>
+                    <p>听<br/>30*40cm / 40*50cm</p>
+                    <a href="#">立即购买</a>
+                </li>
+                <li><img src="images/img3.png" alt="1"/>
+                    <p>悟<br/>30*40cm / 40*50cm</p>
+                    <a href="#">立即购买</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right"> 
+            <div class="img"><img src="images/sc2.png" alt="1"/></div>
+            <div class="text"><h2>观止</h2>
+                <p>价格：99元起<br/>
+                    艺术家：吉祥物语</p>
+                <a href="#">站酷主页</a></div>
+
+
+            
+        </div>
+    </div>
+    <div class="section s3">
+        <div class="left">
+        <ul>
+            <li><img src="images/img4.png" alt="1"/>
+                <p>Love<br/>30*40cm / 40*50cm</p>
+                <a href="#">立即购买</a>
+            </li>
+            <li><img src="images/img5.png" alt="1"/>
+                <p>Filial and eros aw<br/>30*40cm / 40*50cm</p>
+                <a href="#">立即购买</a>
+            </li>
+            <li><img src="images/img6.png" alt="1"/>
+                <p>
+                Good Time<br/>30*40cm / 40*50cm</p>
+                <a href="#">立即购买</a>
+            </li>
+        </ul>
+    </div>
+        <div class="right">
+            <div class="img"><img src="images/sc3.png" alt="1"/></div>
+            <div class="text"><h2>KIDS</h2>
+                <p>价格：99元起<br/>
+                    艺术家：吉祥物语</p>
+                <a href="#">站酷主页</a></div>
+        </div></div>
+    <div class="section s4">
+        <div class="left">
+        <ul>
+            <li><img src="images/img7.png" alt="1"/>
+                <p>
+                    绽放2009
+                  <br/>30*40cm / 40*50cm</p>
+                <a href="#">立即购买</a>
+            </li>
+            <li><img src="images/img8.png" alt="1"/>
+                <p> 绽放2010<br/>30*40cm / 40*50cm</p>
+                <a href="#">立即购买</a>
+            </li>
+            <li><img src="images/img9.png" alt="1"/>
+                <p> 绽放2010<br/>30*40cm / 40*50cm</p>
+                <a href="#">立即购买</a>
+            </li>
+
+
+        </ul>
+    </div>
+        <div class="right">
+            <div class="img"><img src="images/sc4.png" alt="1"/></div>
+            <div class="text"><h2>绽放</h2>
+                <p>价格：99元起<br/>
+                    艺术家：吉祥物语</p>
+                <a href="#">站酷主页</a></div>
+
+
+
+        </div></div>
+    <div class="section s5">
+        <div class="lf">
+            <div class="left">
+                <ul>
+                    <li><img src="images/img10.png" alt="1"/>
+                        <p>栖息<br/>30*40cm / 40*50cm</p>
+                        <a href="#">立即购买</a>
+                    </li>
+                    <li><img src="images/img11.png" alt="1"/>
+                        <p>惊蛰<br/>30*40cm / 40*50cm</p>
+                        <a href="#">立即购买</a>
+                    </li>
+                    <li><img src="images/img12.png" alt="1"/>
+                        <p>恬静<br/>50*60cm</p>
+                        <a href="#">立即购买</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="img"><img src="images/sc5.png" alt="1"/></div>
+            <div class="text"><h2>观止</h2>
+                <p>价格：99元起<br/>
+                    艺术家：吉祥物语</p>
+                <a href="#">站酷主页</a></div>
+
+
+
+        </div></div>
+</div>
+</body>
+</html>
